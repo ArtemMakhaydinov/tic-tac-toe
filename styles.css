@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #C2DED1;
+}
+
+/* GAMEBOARD */
+
+.gameboard {
+    display: grid;
+    grid: repeat(3, 1fr) / repeat(3, 1fr);
+    width: 600px;
+    height: 600px;
+    gap: 3px;
+    background-color: #354259;
+}
+
+.cell {
+    background-color: #C2DED1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 10rem;
+}
