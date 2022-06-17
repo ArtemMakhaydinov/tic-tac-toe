@@ -110,3 +110,9 @@ h1 {
     font-size: 10rem;
     
 }
+
+@media only screen and (max-width: 768px){
+    .cell {
+        font-size: 6rem;
+    }
+}
