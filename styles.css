@@ -87,6 +87,7 @@ h1 {
     text-align: center;
     white-space: pre-wrap;
     line-height: 3rem;
+    padding: 0 15px;
 }
 
 /* GAMEBOARD */
