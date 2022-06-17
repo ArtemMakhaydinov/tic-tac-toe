@@ -149,13 +149,14 @@ const players = (function () {
     return {
         setPlayers,
         getBotMarks,
+        startXBot,
     };
 })();
 
 
 const gameFlow = (function () {
     let currentPlayer = 'X';
-    
+
 
     function handleClick() {
         const cell = +this.dataset.index;
@@ -163,7 +164,7 @@ const gameFlow = (function () {
     }
 
     function handleMove(cell) {
-        
+
         if (_checkWinTie()) {
             return;
         }
@@ -215,14 +216,19 @@ const gameFlow = (function () {
         if (bots.includes(currentPlayer)) {
             botPlay.setMarks(currentPlayer);
             const bestPlay = botPlay.minimax(board, currentPlayer);
-            setTimeout(handleMove, 200, bestPlay.index);
+            setTimeout(handleMove, 100, bestPlay.index);
         }
+    }
+
+    function resetAfterGameEnd() {
+        if (_checkWinTie()) resetGame();
     }
 
     function resetGame() {
         gameBoard.resetBoard();
         gameBoard.renderBoard();
         gameFlow.changePlayer('X');
+        players.startXBot();
     };
 
     function setAnnouncer() {
@@ -241,7 +247,7 @@ const gameFlow = (function () {
         }
         else if (gameBoard.checkTie(board)) {
             announcer.textContent = 'It\'s TIE! \n'
-            announcer.textContent +=  'Click here to restart.';
+            announcer.textContent += 'Click here to restart.';
             return;
         }
         else if (currentPlayer === 'X') {
@@ -259,6 +265,7 @@ const gameFlow = (function () {
         handleMove,
         changePlayer,
         resetGame,
+        resetAfterGameEnd,
     };
 
 })();
@@ -339,4 +346,4 @@ const botPlay = (function () {
 
 document.querySelectorAll('.cell').forEach(e => { e.addEventListener('click', gameFlow.handleClick) });
 document.querySelectorAll('.header_button').forEach(e => { e.addEventListener('click', players.setPlayers) });
-document.querySelector('.announcer').addEventListener('click', gameFlow.resetGame);
+document.querySelector('.announcer').addEventListener('click', gameFlow.resetAfterGameEnd);
